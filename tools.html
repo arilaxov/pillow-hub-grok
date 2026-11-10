@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000"><meta name="description" content="Pillow AI Enhancer and Auto Beats, right in your browser."><title>Tools — Pillow Hub</title>
+<link rel="icon" href="assets/pillow-mark.png"><link rel="preload" href="assets/Relaxe.woff2" as="font" type="font/woff2" crossorigin>
+<script>try{var t=localStorage.getItem("ph_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="site.css?v=93">
+</head>
+<body id="top">
+<header class="topbar">
+  <a class="brand" href="index.html" aria-label="Pillow Hub"><img src="assets/pillow-mark.png" alt=""><span class="wordmark">PiLLOW</span></a>
+  <nav class="nav" aria-label="Sections"><a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.2 12 5l8 6.2V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></g></svg><span>Home</span></a><a href="extension.html"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></g></svg><span>Extension</span></a><a href="tools.html" class="active" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12c1.8 0 1.8-6 3.6-6s1.8 12 3.6 12 1.8-12 3.6-12 1.8 12 3.6 12 1.8-6 2.6-6"/></g></svg><span>Tools</span></a><a href="method.html"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7z"/></g></svg><span>Method</span></a><a href="ai.html"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5c0 4.1-3.6 7.5-8 7.5-1.1 0-2.1-.2-3-.5L4.5 20l1.2-3.6C4.6 15 4 13.3 4 11.5 4 7.4 7.6 4 12 4s8 3.4 8 7.5z"/><path d="M12 8.2l.9 2.2 2.2.9-2.2.9-.9 2.2-.9-2.2-2.2-.9 2.2-.9z" fill="currentColor" stroke-width="1"/></g></svg><span>AI</span></a></nav>
+  <div class="top-actions"><button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></g></svg></button><a class="top-cta" href="extension.html#download"><svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></g></svg><span class="t">Download</span></a></div>
+</header>
+<main class="wrap">
+<section class="tools-head"><div class="rv"><div class="label">tools</div><h1 class="h-sec" style="margin-top:8px;font-size:clamp(36px,6vw,64px)">Tools <span>for the edit</span></h1>
+<p class="lead">They run right in your browser — your files stay on your device.</p></div></section>
+<div class="tools-wrap">
+<div class="tool-tabs" role="tablist"><button class="tool-tab" type="button" data-tab="upscaler" id="tab-upscaler" aria-controls="pane-upscaler" role="tab"><b>Pillow AI Enhancer</b><span>2K · 4K · H.265</span></button><button class="tool-tab" type="button" data-tab="beats" id="tab-beats" aria-controls="pane-beats" role="tab"><b>Auto Beats</b><span>markers → After Effects</span></button></div>
+
+<div class="tool-pane enhancer-pane" data-pane="upscaler" id="pane-upscaler" role="tabpanel" aria-labelledby="tab-upscaler">
+<div class="enhancer-heading"><div><h2>Pillow AI Enhancer</h2><p>Sharper detail, tuned for every clip.</p></div><span class="local-badge"><i></i> On your device</span></div>
+<div class="method-input"><button class="tool-drop" type="button"><span class="drop-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg></span><b>Choose a video to enhance</b><span class="tool-fname">or drop it here</span></button><input type="file" accept="video/*,.mp4,.mov,.mkv,.webm,.ts" hidden aria-label="Choose video to enhance">
+<div id="enhance-activity" class="method-activity" data-stage="load" data-mode="enhanced" hidden>
+  <div class="ai-orbit" aria-hidden="true">
+    <span class="ai-halo"></span>
+    <svg class="ai-network" viewBox="0 0 140 140" fill="none">
+      <g class="ai-ring ai-ring-outer"><circle cx="70" cy="70" r="58"/><path d="M70 12a58 58 0 0 1 58 58"/><circle class="ai-node" cx="70" cy="12" r="3"/><circle class="ai-node" cx="70" cy="128" r="2"/></g>
+      <g class="ai-ring ai-ring-inner"><ellipse cx="70" cy="70" rx="43" ry="24" transform="rotate(-35 70 70)"/><circle class="ai-node" cx="105" cy="49" r="2.5"/><circle class="ai-node" cx="35" cy="91" r="2"/></g>
+      <g class="ai-links"><path d="m70 12 35 79 70-42-35 79-35-79 70 42Z"/><path d="m12 70 58-35 58 35-58 35Z"/></g>
+    </svg>
+    <span class="ai-core"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7z"/></svg></span>
+  </div>
+  <div class="activity-copy"><span id="enhance-brand">Pillow AI</span><strong id="enhance-title">Getting ready</strong></div>
+  <div class="activity-steps" aria-hidden="true"><span data-activity-step="0">Read</span><i></i><span data-activity-step="1">Refine</span><i></i><span data-activity-step="2">Finish</span></div>
+</div>
+</div>
+<p class="src-info"></p>
+<div class="enhance-field"><span class="field-label">Size</span><div class="size-seg enhance-sizes" role="radiogroup" aria-label="Output size"><button type="button" data-size="2k" role="radio" aria-checked="true" disabled><b>2K</b><small>—</small></button><button type="button" data-size="4k" role="radio" aria-checked="false" disabled><b>4K</b><small>—</small></button></div></div>
+<div class="btn-row"><button class="button button-primary go" type="button" disabled>Enhance video <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></button><button class="button button-quiet stop" type="button" hidden>Cancel</button></div>
+<progress class="tool-bar" max="1" value="0" aria-label="Enhancement progress"></progress><p class="tool-status" role="status" aria-live="polite"></p><p class="render-info tool-hint"></p>
+<div class="tool-out" hidden><div class="out-heading"><span class="field-label">The result</span><div class="mini-seg preview-switch" aria-label="Compare video"><button type="button" data-preview="original" aria-pressed="false">Original</button><button type="button" data-preview="enhanced" class="on" aria-pressed="true">Enhanced</button></div></div><video controls playsinline aria-label="Video comparison preview"></video><p class="preview-note tool-hint" hidden></p><div class="out-row"><span class="meta"></span><a class="button button-primary" download>Download video ↓</a></div></div>
+<p class="tool-hint">H.265 · settings picked by Pillow AI · up to 256 MB, 10 min</p>
+</div>
+
+<div class="tool-pane beats-pane" data-pane="beats" id="pane-beats" role="tabpanel" aria-labelledby="tab-beats" hidden>
+<div class="enhancer-heading"><div><h2>Auto Beats</h2><p>Drop a track. Get the markers.</p></div><span class="local-badge"><i></i> On your device</span></div>
+<button class="tool-drop" type="button"><span class="drop-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg></span><b>Drop audio or video</b><span class="tool-fname">or choose a file</span></button><input type="file" accept="audio/*,video/*,.mp3,.wav,.m4a,.aac,.aif,.aiff,.flac,.ogg,.mp4,.mov" hidden aria-label="Choose audio">
+<p class="tool-status" role="status" aria-live="polite"></p>
+<div class="beat-res" hidden>
+<div class="beat-wave"><canvas aria-label="Waveform with beat markers"></canvas></div>
+<audio controls></audio>
+<div class="beat-stats"><div><b class="beat-count">0</b><span>beats</span></div><div><b class="beat-bpm">—</b><span>BPM</span></div></div>
+<div class="out-row beat-actions"><button class="button button-primary dl-jsx" type="button">Download for After Effects <small>.jsx</small></button><button class="button button-quiet dl-copy" type="button">Copy seconds</button><button class="button button-quiet dl-json" type="button" title="Pillow panel: Music → Import from Pillow Hub">Panel <small>.json</small></button></div>
+<p class="tool-hint ae-howto">File → Scripts → Run Script File. Markers go on the selected layer, or the comp.</p>
+</div>
+</div>
+</div>
+</main>
+<footer class="wrap footer"><span class="wordmark">PiLLOW</span><span>Pillow for After Effects</span>
+<nav><a href="https://t.me/pillow_hub_bot" target="_blank" rel="noopener">@pillow_hub_bot</a><a href="https://t.me/arilaxscp" target="_blank" rel="noopener">ARILAX</a><a href="https://t.me/kaban_shashluk" target="_blank" rel="noopener">Kaban Shashluk</a></nav></footer>
+<script src="site.js?v=93"></script><script type="module" src="tools.js?v=93"></script>
+</body></html>

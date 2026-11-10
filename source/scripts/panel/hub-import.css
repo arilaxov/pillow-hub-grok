@@ -1,0 +1,8 @@
+
+/* ─── Import from Pillow Hub ─────────────────────────────────────────── */
+.hub-import { transition: box-shadow 160ms ease; }
+.hub-import.is-over { box-shadow: inset 0 0 0 1px var(--rim-strong), 0 0 0 1px var(--rim-strong); }
+.hub-import-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; min-width: 0; }
+.hub-import-row .btn-ghost { flex: 0 0 auto; }
+.hub-import-file { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: var(--fg-dim); }
+.hub-import-file.is-empty { color: var(--muted); }

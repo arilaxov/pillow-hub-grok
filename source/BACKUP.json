@@ -1,0 +1,9 @@
+{
+  "name": "Pillow Hub",
+  "version": "93.0.0",
+  "site_url": "https://pillow-hub-preview.deepwillow2.chatgpt.site",
+  "frontend_commit": "ec15971d5087edbfb56b5637cf80a3b429504b92",
+  "public_directory": "public",
+  "start": "node server.js",
+  "notes": "v93: Pillow AI tab — local WebLLM assistant (Qwen3.5 2B / 0.8B Lite, Web Worker, WebGPU) with a local knowledge base and in-chat tool actions. v92: Enhancer outputs H.265 via the device encoder (announced H.264 fallback without one), 2K / 4K relative to the source, parameters picked automatically; Auto Beats replaces Beat Sync; Batch Rename removed; Method offers Enhanced and Max Quality (high-bitrate master + duration64 MP4 container patch). Panel 1.1.1. Frontend is a complete snapshot of the deployed dist directory. The portable Node server serves the compressed WASM at both supported URLs."
+}
