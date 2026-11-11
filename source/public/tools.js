@@ -1,6 +1,6 @@
-import {processVideo,validateFile,inspectVideo} from './modules/video-engine.mjs?v=93';
-import {enhanceSize} from './modules/video-plan.mjs?v=93';
-import './tools-beats.js?v=93';
+import {processVideo,validateFile,inspectVideo} from './modules/video-engine.mjs?v=94';
+import {enhanceSize} from './modules/video-plan.mjs?v=94';
+import './tools-beats.js?v=94';
 /* Pillow Tools — Enhancer here; Auto Beats lives in tools-beats.js. */
 (() => {
   'use strict';

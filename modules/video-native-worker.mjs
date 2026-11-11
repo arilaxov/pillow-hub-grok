@@ -1,4 +1,4 @@
-import {processNative,inspectInput,videoCapabilities} from './video-native-core.mjs?v=93';
+import {processNative,inspectInput,videoCapabilities} from './video-native-core.mjs?v=94';
 /* Mediabunny can leave an internal promise rejected after the same error was caught and reported below. */
 self.addEventListener('unhandledrejection',event=>event.preventDefault());
 self.onmessage=async({data:{file,options={},operation='process'}})=>{

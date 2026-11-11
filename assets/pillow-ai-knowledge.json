@@ -1,69 +1,175 @@
 {
-  "version": 1,
-  "updated": "2026-11-10",
-  "entries": [
-    {"id": "who", "title": "Who Pillow AI is",
-     "tags": "кто ты who are you pillow ai assistant ассистент создатель создал кто сделал made by arilax kaban авторы",
-     "text": "Pillow AI is the assistant of Pillow Hub. It was made and trained by ARILAX and KABAN. It runs fully on the user's device in the browser (WebLLM + WebGPU): free, no account, files never leave the device. It knows the Pillow tools, TikTok quality and After Effects export, and can run the site tools right in the chat."},
-    {"id": "channels", "title": "Channels and contacts",
-     "tags": "канал каналы телеграм telegram channel контакты подписаться subscribe arilaxscp kaban_shashluk pillowex связь",
-     "text": "Telegram channels: @arilaxscp (ARILAX), @kaban_shashluk (KABAN), @pillowex (Pillow). Telegram bot: @pillow_hub_bot."},
-    {"id": "bot", "title": "Telegram bot @pillow_hub_bot",
-     "tags": "бот bot pillow_hub_bot получить расширение get extension подписка subscription /extension mini app",
-     "text": "@pillow_hub_bot gives the Pillow After Effects extension after you subscribe to the channels; send /extension. The bot can also open the site as a Telegram Mini App. On the site the ZIP is also on the Extension page."},
-    {"id": "extension", "title": "Pillow — After Effects extension",
-     "tags": "расширение extension панель panel after effects ae что умеет features curves bounce text relink sound effects music liquid glass",
-     "text": "Pillow is a free After Effects panel (macOS and Windows, After Effects 2021 or later): Create (layers in one click, parent, match comp duration, move anchor), Curves (easing presets and point editor), Bounce (overshoot after keyframes), Text animations, Relink (finds missing files), Sound Effects (42 sounds), Music (a marker on every beat plus beat-synced effects), Liquid Glass (Apple-style glass from native AE effects). Current build: Pillow v192, panel 1.1.1."},
-    {"id": "install", "title": "Installing the extension",
-     "tags": "установить установка install как поставить cep debug mode панель не появляется not showing extensions folder папка",
-     "text": "1) Turn on CEP debug mode once: run enable-debug/Enable-CEP-Debug-Mac.command (Mac) or Enable-CEP-Debug-Windows.reg (Windows) from the archive. 2) Put the Pillow folder into ~/Library/Application Support/Adobe/CEP/extensions (Mac) or %APPDATA%\\Adobe\\CEP\\extensions (Windows). 3) Fully restart After Effects. 4) Window → Extensions → Pillow. If it does not show: debug mode must be 1, the path must end with /CEP/extensions/Pillow/, delete an old com.pillow.panel folder."},
-    {"id": "method", "title": "Upload Method page",
-     "tags": "метод method upload загрузка тикток tiktok studio качество quality enhanced max quality какой выбрать which",
-     "text": "Method prepares a video for TikTok, locally. Two options: Enhanced Method · Pillow AI (Pillow AI cleans and refines the clip, Full HD, gives an upload file plus a compatible MP4) and Max Quality · 1080p (keeps a clean H.264 ≤1080p bit-for-bit, otherwise encodes once to a high-bitrate H.264 High master up to 24–30 Mbps with AAC 320k, then patches the MP4 container: moov first, mvhd duration64). Upload the result in TikTok Studio on a computer. TikTok changes processing often, results can vary."},
-    {"id": "max", "title": "Max Quality (1080p)",
-     "tags": "max quality максимальное качество максимальный вес битрейт bitrate patch патч duration64 1080p 60 fps",
-     "text": "Max Quality: up to 1080p and 60 FPS. Clean H.264 sources are kept as they are; others become one high-bitrate master. The container is patched the way current public methods do it (CompressBase-style duration64: mvhd v1 with unknown duration, ftyp→moov→mdat). Streams are untouched by the patch. Use TikTok Studio on desktop. As of November 2026 sources report these methods as unstable or patched at times."},
-    {"id": "enhanced", "title": "Enhanced Method · Pillow AI",
-     "tags": "enhanced энхансед pillow ai шумоподавление denoise ts full hd компатибл compatible",
-     "text": "Enhanced Method: Pillow AI reads the clip (noise, detail), denoises or restores detail if needed and writes Full HD. You get the upload file and a compatible MP4. Built for uploading from TikTok Studio on a computer."},
-    {"id": "enhancer", "title": "Pillow AI Enhancer (Tools)",
-     "tags": "энхансер enhancer апскейл upscale 2k 4k h265 hevc увеличить разрешение resolution tools",
-     "text": "Tools → Pillow AI Enhancer: sizes are 2K (short side 1440) and 4K (short side 2160), relative to the source; a size the source already reaches is disabled. Output is H.265 through the device encoder (Chrome/Edge on Windows/macOS, Safari); without an HEVC encoder it saves H.264 and says so. All settings are picked automatically. Up to 256 MB, 10 minutes. It is adaptive processing, not a generative Topaz-class model."},
-    {"id": "beats", "title": "Auto Beats (Tools)",
-     "tags": "биты beats auto beats маркеры markers bpm jsx after effects музыка music трек track",
-     "text": "Tools → Auto Beats: drop audio or video, beats are detected automatically and shown on a waveform. Download for After Effects (.jsx): File → Scripts → Run Script File; markers go on the selected layer, or on the comp. Re-running replaces Pillow markers, one undo step. Copy seconds copies the times. Panel .json goes to the Pillow panel: Music → Import from Pillow Hub."},
-    {"id": "panel-import", "title": "Import from Pillow Hub (panel)",
-     "tags": "импорт import from pillow hub json панель panel music маркеры",
-     "text": "In the Pillow panel open Music → Import from Pillow Hub and pick the .pillow-beats.json saved by Auto Beats. Needs panel 1.1 or newer."},
-    {"id": "chat-actions", "title": "What Pillow AI can do in chat",
-     "tags": "что умеешь what can you do действия actions файл file перетащи drop",
-     "text": "Drop a video or audio into the chat and say what you want: 'max quality for TikTok', 'enhanced', 'upscale to 2K/4K', 'find beats, give me jsx'. Pillow AI runs the same tools as the site and returns download cards. Everything stays on the device."},
-    {"id": "tiktok-tips", "title": "TikTok quality tips",
-     "tags": "тикток tiktok качество quality мыло blur размытие советы tips залить upload studio компьютер 1080 60fps",
-     "text": "Upload from TikTok Studio on a computer, not the phone app. Export 1080×1920 (9:16). Keep 30 or 60 FPS constant. Avoid re-encoding several times: export once at high quality, then use Method. Strong grain and heavy noise get smeared by TikTok; light denoise helps. Fine text and thin lines survive better slightly bolder. Check the result on a phone after TikTok finishes processing."},
-    {"id": "ae-export", "title": "After Effects export settings",
-     "tags": "экспорт export after effects ae render рендер media encoder настройки settings h264 prores",
-     "text": "Render from After Effects to a high-quality intermediate (ProRes 422 HQ or lossless), then encode once: H.264 High or H.265, 1080×1920, the comp FPS, VBR 2-pass around 20–40 Mbps for H.264, AAC 320 kbps 48 kHz. Do not upscale in AE at render; enhance afterwards if needed."},
-    {"id": "hevc", "title": "HEVC / x265 settings",
-     "tags": "hevc h265 x265 psy-rd aq-mode ffmpeg handbrake настройки settings crf",
-     "text": "Recommended x265 settings for edits: psy-rd=1.0, aq-mode=3, CRF 16–20, preset slow or slower, 10-bit if the target supports it. FFmpeg: ffmpeg -i in.mov -c:v libx265 -preset slow -crf 18 -x265-params psy-rd=1.0:aq-mode=3 -tag:v hvc1 -c:a aac -b:a 320k out.mp4. HandBrake: H.265 (x265), RF 18, preset Slow, Advanced options: psy-rd=1.0:aq-mode=3."},
-    {"id": "handbrake", "title": "HandBrake",
-     "tags": "handbrake хендбрейк хэндбрейк настройки",
-     "text": "HandBrake: Video codec H.265 (x265) or H.264 (x264), Constant Quality RF 16–20, Preset Slow, Framerate Same as source + Constant, resolution unchanged. Audio AAC 320 kbps. Advanced options for x265: psy-rd=1.0:aq-mode=3."},
-    {"id": "topaz", "title": "Topaz Video",
-     "tags": "topaz топаз upscale апскейл proteus artemis",
-     "text": "Topaz Video: upscale to the target size first, export ProRes or a high-bitrate file, then do the final H.264/H.265 encode once. Keep the original frame rate unless you need frame interpolation. Exact model names change between Topaz versions; pick by preview."},
-    {"id": "motion", "title": "Motion-heavy edits",
-     "tags": "motion движение 1440x1080 4:3 fast motion динамика шейк shake",
-     "text": "For motion-heavy 4:3 edits a common choice is 1440×1080 with high bitrate and HEVC (x265 psy-rd=1.0, aq-mode=3). Motion blur and constant frame rate keep fast motion clean after TikTok compression."},
-    {"id": "fanedit", "title": "Fan-edit tips",
-     "tags": "эдит edit фан эдит fan edit советы tips переходы transitions синхрон sync биты velocity",
-     "text": "Cut on beats: run Auto Beats and import the markers. Keep the hook in the first second. Use velocity/ease for rhythm, not just cuts. Clean sources matter most: start from the highest quality clip you can get. Do color and sharpening lightly; TikTok exaggerates noise. Export once at high quality, then use Method."},
-    {"id": "privacy", "title": "Privacy and cost",
-     "tags": "приватность privacy бесплатно free цена price данные data офлайн offline",
-     "text": "Pillow Hub tools and Pillow AI are free. Video, audio and chat stay on the device; the AI model downloads once from Hugging Face and is cached by the browser."},
-    {"id": "models", "title": "Pillow AI models",
-     "tags": "модель model скачать download размер size webgpu не работает doesn't work lite",
-     "text": "Pillow AI uses Qwen3.5 2B (about 1.1 GB download, about 2.2 GB of GPU memory) by default and Qwen3.5 0.8B Lite (about 0.45 GB) for weaker devices. It needs WebGPU: current Chrome, Edge or Safari on a Mac with Apple Silicon works best. Without WebGPU the tools in chat still work."}
-  ]
+ "version": 2,
+ "updated": "2026-11-11",
+ "entries": [
+  {
+   "id": "who",
+   "title": "Who Pillow AI is",
+   "tags": "кто ты who are you pillow ai assistant ассистент создатель создал кто сделал made by arilax kaban авторы",
+   "text": "Pillow AI is the assistant of Pillow Hub. It was made and trained by ARILAX and KABAN. It runs fully on the user's device in the browser (WebLLM + WebGPU): free, no account, files never leave the device. It knows the Pillow tools, TikTok quality and After Effects export, and can run the site tools right in the chat.",
+   "title_ru": "Кто такая Pillow AI",
+   "text_ru": "Pillow AI — ассистент Pillow Hub. Её сделали и обучили ARILAX и KABAN. Работает прямо в браузере на твоём устройстве (WebLLM + WebGPU): бесплатно, без аккаунта, файлы никуда не уходят. Знает инструменты Pillow, качество для TikTok и экспорт из After Effects, умеет запускать инструменты сайта прямо в чате."
+  },
+  {
+   "id": "channels",
+   "title": "Channels and contacts",
+   "tags": "канал каналы телеграм telegram channel контакты подписаться subscribe arilaxscp kaban_shashluk pillowex связь arilax kaban",
+   "text": "Telegram channels: @arilaxscp (ARILAX), @kaban_shashluk (KABAN), @pillowex (Pillow). Telegram bot: @pillow_hub_bot — it gives the extension to subscribers of all three.",
+   "title_ru": "Каналы и контакты",
+   "text_ru": "Telegram-каналы: @arilaxscp (ARILAX), @kaban_shashluk (KABAN), @pillowex (Pillow). Бот: @pillow_hub_bot — выдаёт расширение подписчикам всех трёх."
+  },
+  {
+   "id": "bot",
+   "title": "Telegram bot @pillow_hub_bot",
+   "tags": "бот bot pillow_hub_bot получить расширение get extension подписка subscription /extension mini app arilaxscp kaban_shashluk pillowex подписаться я подписался",
+   "text": "@pillow_hub_bot gives the Pillow After Effects extension after you subscribe to three channels: @arilaxscp, @kaban_shashluk and @pillowex. Send /extension, join the channels from the buttons and tap “I've subscribed ✓” — the bot checks and sends the archive. The bot can also open the site as a Telegram Mini App.",
+   "title_ru": "Бот @pillow_hub_bot",
+   "text_ru": "@pillow_hub_bot выдаёт расширение Pillow для After Effects после подписки на три канала: @arilaxscp, @kaban_shashluk и @pillowex. Отправь /extension, подпишись по кнопкам и нажми «Я подписался ✓» — бот проверит и пришлёт архив. Ещё бот открывает сайт как Telegram Mini App."
+  },
+  {
+   "id": "extension",
+   "title": "Pillow — After Effects extension",
+   "tags": "расширение extension панель panel after effects ae что умеет features curves bounce text relink sound effects music liquid glass",
+   "text": "Pillow is a free After Effects panel (macOS and Windows, After Effects 2021 or later): Create (layers in one click, parent, match comp duration, move anchor), Curves (easing presets and point editor), Bounce (overshoot after keyframes), Text animations, Relink (finds missing files), Sound Effects (42 sounds), Music (a marker on every beat plus beat-synced effects), Liquid Glass (Apple-style glass from native AE effects). Current build: Pillow v192, panel 1.1.1.",
+   "title_ru": "Pillow — расширение для After Effects",
+   "text_ru": "Pillow — бесплатная панель для After Effects (macOS и Windows, AE 2021+): Create (слои в один клик, parent, длина композиции, якорь), Curves (пресеты изинга и редактор точек), Bounce (отскок после ключей), анимации текста, Relink (находит потерянные файлы), Sound Effects (42 звука), Music (маркер на каждый бит и эффекты под бит), Liquid Glass (стекло в стиле Apple из родных эффектов AE). Сборка: Pillow v192, панель 1.1.1."
+  },
+  {
+   "id": "install",
+   "title": "Installing the extension in After Effects",
+   "tags": "установить установка установке устанавливать поставить инсталл install installation setup how to install как поставить cep debug mode playerdebugmode панель не появляется not showing extensions folder папка mac windows",
+   "text": "Mac:\n1) Turn on CEP debug mode once: run enable-debug/Enable-CEP-Debug-Mac.command from the archive (right-click → Open), or in Terminal: defaults write com.adobe.CSXS.11 PlayerDebugMode 1 (repeat for CSXS.10 and CSXS.9).\n2) Unzip and put the Pillow folder into ~/Library/Application Support/Adobe/CEP/extensions (Finder → Go → Go to Folder…, ⇧⌘G).\n3) Fully quit After Effects (check Activity Monitor) and open it again.\n4) Window → Extensions → Pillow.\nWindows:\n1) Double-click enable-debug\\Enable-CEP-Debug-Windows.reg and confirm (or in regedit: HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11 → string PlayerDebugMode = 1).\n2) Win+R → %APPDATA%\\Adobe\\CEP\\extensions → put the Pillow folder there.\n3) Fully close After Effects (Task Manager) and open it again.\n4) Window → Extensions → Pillow.\nNot showing: debug mode must be 1, the path must end with /CEP/extensions/Pillow/, manifest.xml must be in CSXS, delete an old com.pillow.panel folder. Get the archive from @pillow_hub_bot (after subscribing to @arilaxscp, @kaban_shashluk, @pillowex) or the Extension page.",
+   "prefer": "установ|инстал|постав|install|set ?up|не появ|не видн|not show",
+   "title_ru": "Как установить расширение в After Effects",
+   "text_ru": "Mac:\n1) Один раз включи CEP debug mode: запусти enable-debug/Enable-CEP-Debug-Mac.command из архива (правый клик → Открыть) или в Терминале: defaults write com.adobe.CSXS.11 PlayerDebugMode 1 (и то же для CSXS.10 и CSXS.9).\n2) Распакуй архив и положи папку Pillow в ~/Library/Application Support/Adobe/CEP/extensions (Finder → Переход → Перейти к папке…, ⇧⌘G).\n3) Полностью закрой After Effects (проверь Мониторинг системы) и открой снова.\n4) Window → Extensions → Pillow.\nWindows:\n1) Дважды кликни enable-debug\\Enable-CEP-Debug-Windows.reg и подтверди (или в regedit: HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11 → строка PlayerDebugMode = 1).\n2) Win+R → %APPDATA%\\Adobe\\CEP\\extensions → положи туда папку Pillow.\n3) Полностью закрой After Effects (Диспетчер задач) и открой снова.\n4) Window → Extensions → Pillow.\nНе появилась: debug mode = 1, путь заканчивается на /CEP/extensions/Pillow/, manifest.xml лежит в CSXS, старую папку com.pillow.panel удали. Архив — в @pillow_hub_bot (после подписки на @arilaxscp, @kaban_shashluk, @pillowex) или на странице Extension."
+  },
+  {
+   "id": "method",
+   "title": "Upload Method page",
+   "tags": "метод method upload загрузка тикток tiktok studio качество quality enhanced max quality какой выбрать which",
+   "text": "Method prepares a video for TikTok, locally. Two options: Enhanced Method · Pillow AI (Pillow AI cleans and refines the clip, Full HD, gives an upload file plus a compatible MP4) and Max Quality · 1080p (keeps a clean H.264 ≤1080p bit-for-bit, otherwise encodes once to a high-bitrate H.264 High master up to 24–30 Mbps with AAC 320k, then patches the MP4 container: moov first, mvhd duration64). Upload the result in TikTok Studio on a computer. TikTok changes processing often, results can vary.",
+   "title_ru": "Страница Method",
+   "text_ru": "Method готовит видео для TikTok локально. Два варианта: Enhanced Method · Pillow AI (Pillow AI чистит и дорабатывает клип, Full HD, даёт файл для загрузки и совместимый MP4) и Max Quality · 1080p (чистый H.264 до 1080p оставляет как есть, остальное кодирует один раз в мастер H.264 High до 24–30 Мбит/с с AAC 320k и патчит контейнер MP4: moov в начале, mvhd duration64). Заливай через TikTok Studio с компьютера. TikTok часто меняет обработку, результат может отличаться."
+  },
+  {
+   "id": "max",
+   "title": "Max Quality (1080p)",
+   "tags": "max quality максимальное качество максимальный вес битрейт bitrate patch патч duration64 1080p 60 fps",
+   "text": "Max Quality: up to 1080p and 60 FPS. Clean H.264 sources are kept as they are; others become one high-bitrate master. The container is patched the way current public methods do it (CompressBase-style duration64: mvhd v1 with unknown duration, ftyp→moov→mdat). Streams are untouched by the patch. Use TikTok Studio on desktop. As of November 2026 sources report these methods as unstable or patched at times.",
+   "title_ru": "Max Quality (1080p)",
+   "text_ru": "Max Quality: до 1080p и 60 FPS. Чистый H.264 остаётся как есть, остальное — один мастер с высоким битрейтом. Контейнер патчится как в актуальных публичных методах (duration64 в стиле CompressBase: mvhd v1 с неизвестной длительностью, ftyp→moov→mdat). Потоки патч не трогает. Заливай через TikTok Studio на компьютере. На ноябрь 2026 такие методы то работают, то их прикрывают."
+  },
+  {
+   "id": "enhanced",
+   "title": "Enhanced Method · Pillow AI",
+   "tags": "enhanced энхансед pillow ai шумоподавление denoise ts full hd компатибл compatible",
+   "text": "Enhanced Method: Pillow AI reads the clip (noise, detail), denoises or restores detail if needed and writes Full HD. You get the upload file and a compatible MP4. Built for uploading from TikTok Studio on a computer.",
+   "title_ru": "Enhanced Method · Pillow AI",
+   "text_ru": "Enhanced Method: Pillow AI анализирует клип (шум, детали), при необходимости чистит шум или возвращает детали и пишет Full HD. На выходе файл для загрузки и совместимый MP4. Рассчитан на загрузку через TikTok Studio с компьютера."
+  },
+  {
+   "id": "enhancer",
+   "title": "Pillow AI Enhancer (Tools)",
+   "tags": "энхансер enhancer апскейл upscale 2k 4k h265 hevc увеличить разрешение resolution tools",
+   "text": "Tools → Pillow AI Enhancer: sizes are 2K (short side 1440) and 4K (short side 2160), relative to the source; a size the source already reaches is disabled. Output is H.265 through the device encoder (Chrome/Edge on Windows/macOS, Safari); without an HEVC encoder it saves H.264 and says so. All settings are picked automatically. Up to 256 MB, 10 minutes. It is adaptive processing, not a generative Topaz-class model.",
+   "title_ru": "Pillow AI Enhancer (Tools)",
+   "text_ru": "Tools → Pillow AI Enhancer: размеры 2K (короткая сторона 1440) и 4K (2160) относительно исходника; если исходник уже такой — размер выключен. Выход H.265 через кодер устройства (Chrome/Edge на Windows/macOS, Safari); без HEVC-кодера сохранит H.264 и предупредит. Все настройки подбираются автоматически. До 256 МБ и 10 минут. Это адаптивная обработка, а не генеративная модель уровня Topaz."
+  },
+  {
+   "id": "beats",
+   "title": "Auto Beats (Tools)",
+   "tags": "биты beats auto beats маркеры markers bpm jsx after effects музыка music трек track",
+   "text": "Tools → Auto Beats: drop audio or video, beats are detected automatically and shown on a waveform. Download for After Effects (.jsx): File → Scripts → Run Script File; markers go on the selected layer, or on the comp. Re-running replaces Pillow markers, one undo step. Copy seconds copies the times. Panel .json goes to the Pillow panel: Music → Import from Pillow Hub.",
+   "title_ru": "Auto Beats (Tools)",
+   "text_ru": "Tools → Auto Beats: перетащи аудио или видео, биты найдутся сами и покажутся на волне. Скачай .jsx для After Effects: File → Scripts → Run Script File; маркеры встанут на выделенный слой или на композицию. Повторный запуск заменяет маркеры Pillow, отмена — одним шагом. Copy seconds копирует время. Файл .json — для панели Pillow: Music → Import from Pillow Hub."
+  },
+  {
+   "id": "panel-import",
+   "title": "Import from Pillow Hub (panel)",
+   "tags": "импорт import from pillow hub json панель panel music маркеры",
+   "text": "In the Pillow panel open Music → Import from Pillow Hub and pick the .pillow-beats.json saved by Auto Beats. Needs panel 1.1 or newer.",
+   "title_ru": "Import from Pillow Hub (панель)",
+   "text_ru": "В панели Pillow открой Music → Import from Pillow Hub и выбери .pillow-beats.json из Auto Beats. Нужна панель 1.1 или новее."
+  },
+  {
+   "id": "chat-actions",
+   "title": "What Pillow AI can do in chat",
+   "tags": "что умеешь what can you do действия actions файл file перетащи drop умеешь умеет можешь функции возможности help помощь capabilities",
+   "text": "Drop a video or audio into the chat and say what you want: 'max quality for TikTok', 'enhanced', 'upscale to 2K/4K', 'find beats, give me jsx'. Pillow AI runs the same tools as the site and returns download cards. Everything stays on the device.",
+   "title_ru": "Что Pillow AI умеет в чате",
+   "text_ru": "Перетащи видео или аудио в чат и скажи, что сделать: «макс качество для тиктока», «enhanced», «апскейл в 2K/4K», «найди биты, дай jsx». Pillow AI запустит те же инструменты, что на сайте, и отдаст файлы. Всё остаётся на устройстве."
+  },
+  {
+   "id": "tiktok-tips",
+   "title": "TikTok quality tips",
+   "tags": "тикток tiktok качество quality мыло blur размытие советы tips залить upload studio компьютер 1080 60fps",
+   "text": "Upload from TikTok Studio on a computer, not the phone app. Export 1080×1920 (9:16). Keep 30 or 60 FPS constant. Avoid re-encoding several times: export once at high quality, then use Method. Strong grain and heavy noise get smeared by TikTok; light denoise helps. Fine text and thin lines survive better slightly bolder. Check the result on a phone after TikTok finishes processing.",
+   "title_ru": "Советы по качеству в TikTok",
+   "text_ru": "Заливай через TikTok Studio с компьютера, а не из приложения. Экспорт 1080×1920 (9:16). Держи постоянные 30 или 60 FPS. Не пережимай по несколько раз: один качественный экспорт, потом Method. Сильное зерно и шум TikTok размазывает, лёгкий денойз помогает. Мелкий текст и тонкие линии лучше делать чуть жирнее. Проверь результат на телефоне после обработки."
+  },
+  {
+   "id": "ae-export",
+   "title": "After Effects export settings",
+   "tags": "экспорт export after effects ae render рендер media encoder настройки settings h264 prores",
+   "text": "Render from After Effects to a high-quality intermediate (ProRes 422 HQ or lossless), then encode once: H.264 High or H.265, 1080×1920, the comp FPS, VBR 2-pass around 20–40 Mbps for H.264, AAC 320 kbps 48 kHz. Do not upscale in AE at render; enhance afterwards if needed.",
+   "title_ru": "Экспорт из After Effects",
+   "text_ru": "Рендери из After Effects в качественный промежуточный файл (ProRes 422 HQ или lossless), потом кодируй один раз: H.264 High или H.265, 1080×1920, FPS композиции, VBR 2-pass около 20–40 Мбит/с для H.264, AAC 320 кбит/с 48 кГц. Не апскейль в AE при рендере, улучшай потом."
+  },
+  {
+   "id": "hevc",
+   "title": "HEVC / x265 settings",
+   "tags": "hevc h265 x265 psy-rd aq-mode ffmpeg handbrake настройки settings crf",
+   "text": "Recommended x265 settings for edits: psy-rd=1.0, aq-mode=3, CRF 16–20, preset slow or slower, 10-bit if the target supports it. FFmpeg: ffmpeg -i in.mov -c:v libx265 -preset slow -crf 18 -x265-params psy-rd=1.0:aq-mode=3 -tag:v hvc1 -c:a aac -b:a 320k out.mp4. HandBrake: H.265 (x265), RF 18, preset Slow, Advanced options: psy-rd=1.0:aq-mode=3.",
+   "title_ru": "Настройки HEVC / x265",
+   "text_ru": "Для эдитов в x265: psy-rd=1.0, aq-mode=3, CRF 16–20, preset slow или slower, 10 бит если площадка поддерживает. FFmpeg: ffmpeg -i in.mov -c:v libx265 -preset slow -crf 18 -x265-params psy-rd=1.0:aq-mode=3 -tag:v hvc1 -c:a aac -b:a 320k out.mp4. HandBrake: H.265 (x265), RF 18, preset Slow, Advanced options: psy-rd=1.0:aq-mode=3."
+  },
+  {
+   "id": "handbrake",
+   "title": "HandBrake",
+   "tags": "handbrake хендбрейк хэндбрейк настройки",
+   "text": "HandBrake: Video codec H.265 (x265) or H.264 (x264), Constant Quality RF 16–20, Preset Slow, Framerate Same as source + Constant, resolution unchanged. Audio AAC 320 kbps. Advanced options for x265: psy-rd=1.0:aq-mode=3.",
+   "title_ru": "HandBrake",
+   "text_ru": "HandBrake: кодек H.265 (x265) или H.264 (x264), Constant Quality RF 16–20, Preset Slow, Framerate Same as source + Constant, разрешение без изменений. Звук AAC 320 кбит/с. Advanced options для x265: psy-rd=1.0:aq-mode=3."
+  },
+  {
+   "id": "topaz",
+   "title": "Topaz Video",
+   "tags": "topaz топаз upscale апскейл proteus artemis",
+   "text": "Topaz Video: upscale to the target size first, export ProRes or a high-bitrate file, then do the final H.264/H.265 encode once. Keep the original frame rate unless you need frame interpolation. Exact model names change between Topaz versions; pick by preview.",
+   "title_ru": "Topaz Video",
+   "text_ru": "Topaz Video: сначала апскейл до нужного размера, экспорт в ProRes или файл с высоким битрейтом, потом один финальный H.264/H.265. FPS оставляй родной, если не нужна интерполяция. Названия моделей меняются от версии к версии — выбирай по превью."
+  },
+  {
+   "id": "motion",
+   "title": "Motion-heavy edits",
+   "tags": "motion движение 1440x1080 4:3 fast motion динамика шейк shake",
+   "text": "For motion-heavy 4:3 edits a common choice is 1440×1080 with high bitrate and HEVC (x265 psy-rd=1.0, aq-mode=3). Motion blur and constant frame rate keep fast motion clean after TikTok compression.",
+   "title_ru": "Эдиты с активным движением",
+   "text_ru": "Для динамичных эдитов 4:3 часто берут 1440×1080 с высоким битрейтом и HEVC (x265 psy-rd=1.0, aq-mode=3). Motion blur и постоянный FPS сохраняют быстрое движение чистым после сжатия TikTok."
+  },
+  {
+   "id": "fanedit",
+   "title": "Fan-edit tips",
+   "tags": "эдит edit фан эдит fan edit советы tips переходы transitions синхрон sync биты velocity",
+   "text": "Cut on beats: run Auto Beats and import the markers. Keep the hook in the first second. Use velocity/ease for rhythm, not just cuts. Clean sources matter most: start from the highest quality clip you can get. Do color and sharpening lightly; TikTok exaggerates noise. Export once at high quality, then use Method.",
+   "title_ru": "Советы для фан-эдитов",
+   "text_ru": "Режь по битам: запусти Auto Beats и импортируй маркеры. Хук — в первую секунду. Ритм делай через velocity/изинг, а не только склейками. Главное — чистые исходники: бери клип в максимальном качестве. Цвет и резкость — аккуратно, TikTok усиливает шум. Экспорт один раз в высоком качестве, потом Method."
+  },
+  {
+   "id": "privacy",
+   "title": "Privacy and cost",
+   "tags": "приватность privacy бесплатно free цена price данные data офлайн offline",
+   "text": "Pillow Hub tools and Pillow AI are free. Video, audio and chat stay on the device; the AI model downloads once from Hugging Face and is cached by the browser.",
+   "title_ru": "Приватность и цена",
+   "text_ru": "Инструменты Pillow Hub и Pillow AI бесплатны. Видео, аудио и чат остаются на устройстве; модель ИИ скачивается один раз с Hugging Face и кэшируется браузером."
+  },
+  {
+   "id": "models",
+   "title": "Pillow AI models",
+   "tags": "модель model скачать download размер size webgpu не работает doesn't work lite",
+   "text": "Pillow AI uses Qwen3.5 2B (about 1.1 GB download, about 2.2 GB of GPU memory) by default and Qwen3.5 0.8B Lite (about 0.45 GB) for weaker devices. It needs WebGPU: current Chrome, Edge or Safari on a Mac with Apple Silicon works best. Without WebGPU the tools in chat still work.",
+   "title_ru": "Модели Pillow AI",
+   "text_ru": "По умолчанию Pillow AI использует Qwen3.5 2B (около 1,1 ГБ загрузки и 2,2 ГБ видеопамяти), для слабых устройств — Qwen3.5 0.8B Lite (около 0,45 ГБ). Нужен WebGPU: лучше всего свежий Chrome, Edge или Safari на Mac с Apple Silicon. Без WebGPU инструменты в чате всё равно работают."
+  }
+ ]
 }

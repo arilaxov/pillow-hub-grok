@@ -22,10 +22,10 @@ async function getEngine(signal,onStatus){
  return warming;
 }
 export async function inspectVideo(file,{signal}={}){
- validateFile(file);const {deviceJob}=await import('./video-device.mjs?v=93');return deviceJob(file,{}, {signal},'inspect');
+ validateFile(file);const {deviceJob}=await import('./video-device.mjs?v=94');return deviceJob(file,{}, {signal},'inspect');
 }
 export async function getVideoCapabilities(plan,{signal}={}){
- const {deviceJob}=await import('./video-device.mjs?v=93');return deviceJob(null,{plan},{signal},'capabilities');
+ const {deviceJob}=await import('./video-device.mjs?v=94');return deviceJob(null,{plan},{signal},'capabilities');
 }
 export async function processVideo(file,options={},hooks={}){
  validateFile(file);if(active)throw new Error('Another video is already being processed.');active=true;
@@ -39,11 +39,11 @@ export async function processVideo(file,options={},hooks={}){
  try{
   check(hooks.signal);hooks.onStage?.('load');hooks.onStatus?.('Getting ready…');onProgress(.01);
   if(options.engine!=='compatibility'){
-   try{const {deviceJob}=await import('./video-device.mjs?v=93');result=await deviceJob(file,options,wrapped);return result;}
+   try{const {deviceJob}=await import('./video-device.mjs?v=94');result=await deviceJob(file,options,wrapped);return result;}
    catch(error){check(hooks.signal);if(!error.recoverable)throw error;hooks.onStatus?.('Switching to the compatibility engine…');}
   }
   const ff=await getEngine(hooks.signal,text=>hooks.onStatus?.(text));check(hooks.signal);
-  const {processSoftware}=await import('./video-software.mjs?v=93');
+  const {processSoftware}=await import('./video-software.mjs?v=94');
   result=await processSoftware(file,options,wrapped,ff);return result;
  }catch(error){
   if(hooks.signal?.aborted)throw abortError();

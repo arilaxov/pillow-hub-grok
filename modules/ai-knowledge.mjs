@@ -17,7 +17,13 @@ export function tokens(text) {
   return (String(text).toLowerCase().match(/[a-zа-яё0-9.+]+/gi) || []).map(t => t.replace(/^\.+|\.+$/g, '')).filter(t => t && !STOP.has(t)).map(stem).filter(Boolean);
 }
 export function buildIndex(base) {
-  const docs = base.entries.map(e => { const t = [...tokens(e.title), ...tokens(e.title), ...tokens(e.tags), ...tokens(e.tags), ...tokens(e.text)]; const tf = new Map(); t.forEach(x => tf.set(x, (tf.get(x) || 0) + 1)); return { entry: e, tf, len: t.length }; });
+  const docs = base.entries.map(e => {
+    const t = [...tokens(e.title), ...tokens(e.title), ...tokens(e.title_ru || ''), ...tokens(e.tags), ...tokens(e.tags), ...tokens(e.text), ...tokens(e.text_ru || '')];
+    const tf = new Map(); t.forEach(x => tf.set(x, (tf.get(x) || 0) + 1));
+    // "prefer": regex of intents this entry must win (e.g. install questions → install steps, not the feature list)
+    let prefer = null; try { prefer = e.prefer ? new RegExp(e.prefer, 'i') : null; } catch (_) {}
+    return { entry: e, tf, len: t.length, prefer };
+  });
   const df = new Map(); docs.forEach(d => d.tf.forEach((_, k) => df.set(k, (df.get(k) || 0) + 1)));
   const avg = docs.reduce((s, d) => s + d.len, 0) / Math.max(1, docs.length);
   return { docs, df, avg, n: docs.length };
@@ -27,10 +33,13 @@ export function retrieve(index, query, k = 3) {
   const scored = index.docs.map(d => {
     let s = 0;
     for (const t of q) { const f = d.tf.get(t); if (!f) continue; const idf = Math.log(1 + (index.n - index.df.get(t) + .5) / (index.df.get(t) + .5)); s += idf * f * (k1 + 1) / (f + k1 * (1 - b + b * d.len / index.avg)); }
+    if (d.prefer && d.prefer.test(query)) s += 8;
     return { entry: d.entry, score: s };
   }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
   return scored.slice(0, k);
 }
+/* Entry text in the user's language (RU fields when present). */
+export const localize = (entry, lang = 'en') => (lang === 'ru' && entry.text_ru ? { ...entry, title: entry.title_ru || entry.title, text: entry.text_ru } : entry);
 let cached = null;
 export async function loadKnowledge(url = new URL('../assets/pillow-ai-knowledge.json', import.meta.url)) {
   if (!cached) cached = fetch(url).then(r => { if (!r.ok) throw new Error('Knowledge base unavailable'); return r.json(); }).then(buildIndex).catch(e => { cached = null; throw e; });

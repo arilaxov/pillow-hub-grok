@@ -1,5 +1,5 @@
 /* Pillow AI — runs the real site tools for the chat and returns download cards. */
-import { ACTIONS } from './ai-intent.mjs?v=93';
+import { ACTIONS } from './ai-intent.mjs?v=94';
 const base = name => (name || 'video').replace(/\.[^.]+$/, '') || 'video';
 const mb = n => n >= 1e9 ? (n / 1e9).toFixed(2) + ' GB' : (n / 1e6).toFixed(1) + ' MB';
 
@@ -9,12 +9,12 @@ export async function runAction(action, file, hooks = {}) {
 }
 
 async function runVideo(action, file, { onStatus = () => {}, onProgress = () => {}, signal } = {}) {
-  const { processVideo, inspectVideo } = await import('./video-engine.mjs?v=93');
+  const { processVideo, inspectVideo } = await import('./video-engine.mjs?v=94');
   const name = base(file.name);
   if (action === 'enhance2k' || action === 'enhance4k') {
     const target = action === 'enhance4k' ? '4k' : '2k';
     try {
-      const { enhanceSize } = await import('./video-plan.mjs?v=93');
+      const { enhanceSize } = await import('./video-plan.mjs?v=94');
       const info = await inspectVideo(file, { signal });
       if (!enhanceSize(info, target).available) {
         if (target === '2k' && enhanceSize(info, '4k').available) throw new Error('This video is already 2K. Try 4K.');
@@ -36,8 +36,8 @@ async function runVideo(action, file, { onStatus = () => {}, onProgress = () => 
 }
 
 async function runBeats(file, { onStatus = () => {}, signal } = {}) {
-  const { extractFeatures, detectStructure, autoBeats, AUTO_SENSITIVITY } = await import('./beat-analysis.mjs?v=93');
-  const { beatsPayload, payloadJsx } = await import('./ae-bridge.mjs?v=93');
+  const { extractFeatures, detectStructure, autoBeats, AUTO_SENSITIVITY } = await import('./beat-analysis.mjs?v=94');
+  const { beatsPayload, payloadJsx } = await import('./ae-bridge.mjs?v=94');
   if (!file.size || file.size > 512 * 1024 * 1024) throw new Error('Choose an audio or video file under 512 MB.');
   onStatus('Reading audio…');
   const ac = new (globalThis.AudioContext || globalThis.webkitAudioContext)();

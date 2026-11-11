@@ -3,7 +3,7 @@ export function deviceJob(file,options={},hooks={},operation='process'){
  check(hooks.signal);
  return new Promise((resolve,reject)=>{
   let worker;
-  try{worker=new Worker(new URL('./video-native-worker.mjs?v=93',import.meta.url),{type:'module'});}catch(error){error.recoverable=true;reject(error);return;}
+  try{worker=new Worker(new URL('./video-native-worker.mjs?v=94',import.meta.url),{type:'module'});}catch(error){error.recoverable=true;reject(error);return;}
   const cleanup=()=>{hooks.signal?.removeEventListener('abort',abort);worker.terminate();};
   const abort=()=>{cleanup();reject(abortError());};
   hooks.signal?.addEventListener('abort',abort,{once:true});

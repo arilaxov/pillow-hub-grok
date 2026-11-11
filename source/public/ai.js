@@ -1,22 +1,30 @@
 /* Pillow AI — chat UI. WebLLM loads only here, only when asked. */
-import { MODELS, gpuStatus, modelFor, isCached, loadModel, ready, stream, complete, stripThink, isGpuLost, dropEngine } from './modules/ai-engine.mjs?v=93';
-import { loadKnowledge, retrieve } from './modules/ai-knowledge.mjs?v=93';
-import { ruleIntent, parseModelIntent, pickAction, fileKind, ACTIONS, INTENT_PROMPT } from './modules/ai-intent.mjs?v=93';
-import { systemPrompt, detectLang } from './modules/ai-prompt.mjs?v=93';
+import { MODELS, gpuStatus, modelFor, isCached, loadModel, ready, stream, complete, stripThink, isGpuLost, dropEngine } from './modules/ai-engine.mjs?v=94';
+import { loadKnowledge, retrieve, localize } from './modules/ai-knowledge.mjs?v=94';
+import { ruleIntent, parseModelIntent, pickAction, fileKind, ACTIONS, INTENT_PROMPT } from './modules/ai-intent.mjs?v=94';
+import { systemPrompt, detectLang, isSmallTalk, capabilities } from './modules/ai-prompt.mjs?v=94';
 
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const shell = $('#ai'), log = $('#ai-log'), form = $('#ai-form'), text = $('#ai-text'), send = $('#ai-send'), fileInput = $('#ai-file-input');
 const loadBtn = $('#ai-load'), state = $('#ai-state'), notice = $('#ai-notice'), prog = $('#ai-progress'), chipsBox = $('#ai-chips'), filePill = $('#ai-file'), drop = $('#ai-drop');
 const RU = /^ru\b/i.test(navigator.language || '');
-const T = RU ? {
+const TX = {
+  ru: {
   chips: ['Макс. качество для TikTok', 'Апскейл в 4K', 'Биты → .jsx', 'Кто тебя сделал?', 'Настройки x265'],
   dropFirst: 'Перетащи файл сюда — сделаю.', which: 'Что сделать с файлом?', guide: 'Из справочника Pillow', loadHint: 'Загрузи Pillow AI для полных ответов.',
   noGpu: 'Здесь нет WebGPU. Чат отвечает по справочнику Pillow, инструменты работают.', unsure: 'Не уверен. Спроси иначе или загляни в канал @pillowex.', working: 'Работаю…', done: 'Готово.',
-} : {
+  caps: [['max', 'Макс. качество'], ['enhanced', 'Enhanced'], ['enhance4k', 'Апскейл 4K'], ['beats', 'Биты → .jsx']],
+  },
+  en: {
   chips: ['Max Quality for TikTok', 'Upscale to 4K', 'Beats → .jsx', 'Who made you?', 'x265 settings'],
   dropFirst: 'Drop the file here — I’ll do it.', which: 'What should I do with it?', guide: 'From the Pillow guide', loadHint: 'Load Pillow AI for full answers.',
   noGpu: 'No WebGPU here. Chat answers from the Pillow guide; tools still work.', unsure: 'Not sure. Try asking another way or check @pillowex.', working: 'Working…', done: 'Done.',
+  caps: [['max', 'Max Quality'], ['enhanced', 'Enhanced'], ['enhance4k', 'Upscale 4K'], ['beats', 'Beats → .jsx']],
+  },
 };
+const T = TX[RU ? 'ru' : 'en'];
+// answers follow the language of the question, not the browser
+const TL = q => TX[detectLang(q)];
 const CHIP_ACTION = [{ action: 'max' }, { action: 'enhance4k' }, { action: 'beats' }, {}, {}];
 let gpu = null, modelKey = localStorage.getItem('ph_ai_model') || 'main', file = null, pendingFile = null, pendingAction = null, busy = false, history = [], urls = [];
 let kb = null;
@@ -90,7 +98,7 @@ async function act(action, f) {
   const status = $('.ai-run-status', msg), fill = $('.ai-progress-track i', msg), ctrl = new AbortController();
   $('.ai-run-stop', msg).addEventListener('click', () => ctrl.abort());
   try {
-    const { runAction } = await import('./modules/ai-actions.mjs?v=93');
+    const { runAction } = await import('./modules/ai-actions.mjs?v=94');
     const card = await runAction(action, f, { signal: ctrl.signal, onStatus: s => { status.textContent = s; }, onProgress: p => { fill.style.transform = `scaleX(${p})`; } });
     msg.classList.remove('is-running'); $('.ai-bubble', msg).innerHTML = renderCard(card); wireCard(msg, card);
     history.push({ role: 'assistant', content: `[Ran ${ACTIONS[action].label} on ${f.name}: ${card.meta}]` });
@@ -118,27 +126,44 @@ function drawBeats(cv, c) {
 }
 
 // ---------- chat ----------
+function showCapabilities(q) {
+  const lang = detectLang(q), t = TX[lang];
+  const el = assistantSay(capabilities(lang).text);
+  const row = document.createElement('div'); row.className = 'ai-cap-actions';
+  t.caps.forEach(([action, label]) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'ai-chip'; b.textContent = label;
+    b.addEventListener('click', () => {
+      if (busy) return;
+      userSay(label);
+      if (pendingFile) { const pf = pendingFile; pendingFile = null; return act(action, pf); }
+      pendingAction = action; assistantSay(t.dropFirst); openPicker();
+    });
+    row.appendChild(b);
+  });
+  $('.ai-bubble', el).appendChild(row); scroll();
+}
 async function answer(q) {
   kb ??= await loadKnowledge().catch(() => null);
-  const hits = kb ? retrieve(kb, q, 3) : [], lang = detectLang(q);
+  const hits = kb ? retrieve(kb, q, 3) : [], lang = detectLang(q), t = TX[lang];
   if (!ready()) {
     const top = hits[0];
-    if (!top || top.score < 2) { assistantSay(T.unsure); return; }
-    const el = assistantSay(`**${top.entry.title}**\n${top.entry.text}`); el.classList.add('is-guide');
-    $('.ai-bubble', el).insertAdjacentHTML('beforeend', `<p class="ai-guide-note">${T.guide}${gpu?.ok ? ` · <button type="button" class="ai-inline-load">${T.loadHint}</button>` : ''}</p>`);
+    if (!top || top.score < 2) { assistantSay(t.unsure); return; }
+    const entry = localize(top.entry, lang);
+    const el = assistantSay(`**${entry.title}**\n${entry.text}`); el.classList.add('is-guide');
+    $('.ai-bubble', el).insertAdjacentHTML('beforeend', `<p class="ai-guide-note">${t.guide}${gpu?.ok ? ` · <button type="button" class="ai-inline-load">${t.loadHint}</button>` : ''}</p>`);
     $('.ai-inline-load', el)?.addEventListener('click', startModel);
     return;
   }
-  const messages = [{ role: 'system', content: systemPrompt(hits.map(h => h.entry), lang) }, ...history.slice(-6), { role: 'user', content: q }];
+  const messages = [{ role: 'system', content: systemPrompt(hits.map(h => localize(h.entry, lang)), lang) }, ...history.slice(-6), { role: 'user', content: q }];
   const el = bubble('bot', '<p class="ai-typing"><i></i><i></i><i></i></p>'); const box = $('.ai-bubble', el);
   let raw = '';
   try {
     for await (const d of stream(messages)) { raw += d; const clean = stripThink(raw); if (clean) { box.innerHTML = md(clean); scroll(); } }
-    const final = stripThink(raw).trim() || T.unsure; box.innerHTML = md(final);
+    const final = stripThink(raw).trim() || t.unsure; box.innerHTML = md(final);
     history.push({ role: 'user', content: q }, { role: 'assistant', content: final });
   } catch (e) {
-    if (isGpuLost(e)) { dropEngine(); shell.classList.remove('is-live'); refreshState(); box.innerHTML = md(RU ? 'Видеокарта не справилась с моделью. Загрузи ещё раз или выбери **Lite**.' : 'The GPU couldn’t keep the model running. Load it again or pick **Lite**.'); }
-    else box.innerHTML = md((RU ? 'Ошибка модели: ' : 'Model error: ') + String(e.message || e).slice(0, 160));
+    if (isGpuLost(e)) { dropEngine(); shell.classList.remove('is-live'); refreshState(); box.innerHTML = md(lang === 'ru' ? 'Видеокарта не справилась с моделью. Загрузи ещё раз или выбери **Lite**.' : 'The GPU couldn’t keep the model running. Load it again or pick **Lite**.'); }
+    else box.innerHTML = md((lang === 'ru' ? 'Ошибка модели: ' : 'Model error: ') + String(e.message || e).slice(0, 160));
   }
 }
 async function submit(raw) {
@@ -156,9 +181,10 @@ async function submit(raw) {
     if (action) return act(action, f);
     pendingFile = f; assistantSay(T.which); actionChips(); return;
   }
+  if (isSmallTalk(q)) { showCapabilities(q); history.push({ role: 'user', content: q }, { role: 'assistant', content: capabilities(detectLang(q)).text }); return; }
   const rule = ruleIntent(q, null);
   if (rule.action && rule.confidence >= .85 && pendingFile) { const pf = pendingFile; pendingFile = null; return act(rule.action, pf); }
-  if (rule.action && rule.confidence >= .9 && !/[?？]|как|how|что|what|почему|why/i.test(q)) { pendingAction = rule.action; assistantSay(T.dropFirst); return; }
+  if (rule.action && rule.confidence >= .9 && !/[?？]|как|how|что|what|почему|why/i.test(q)) { pendingAction = rule.action; assistantSay(TL(q).dropFirst); return; }
   busy = true; updateSend();
   try { await answer(q); } finally { busy = false; updateSend(); }
 }

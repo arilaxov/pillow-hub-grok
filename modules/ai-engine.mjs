@@ -28,7 +28,7 @@ export async function loadModel(id, onProgress = () => {}) {
   if (mock()) { engine = await mock().create(id, onProgress); loadedId = id; return engine; }
   const w = await lib();
   if (engine) { try { await engine.unload(); } catch {} engine = null; loadedId = null; }
-  worker = new Worker(new URL('./ai-worker.mjs?v=93', import.meta.url), { type: 'module' });
+  worker = new Worker(new URL('./ai-worker.mjs?v=94', import.meta.url), { type: 'module' });
   try {
     engine = await w.CreateWebWorkerMLCEngine(worker, id, { initProgressCallback: r => onProgress(r) }, { context_window_size: 4096 });
   } catch (e) { worker.terminate(); worker = null; throw e; }

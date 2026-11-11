@@ -1,7 +1,7 @@
 /* Pillow Auto Beats — drop a track, get beat markers, send them to After Effects. */
-import {$, download} from './modules/tool-ui.mjs?v=93';
-import {extractFeatures, detectStructure, autoBeats, AUTO_SENSITIVITY} from './modules/beat-analysis.mjs?v=93';
-import {beatsPayload, payloadJsx} from './modules/ae-bridge.mjs?v=93';
+import {$, download} from './modules/tool-ui.mjs?v=94';
+import {extractFeatures, detectStructure, autoBeats, AUTO_SENSITIVITY} from './modules/beat-analysis.mjs?v=94';
+import {beatsPayload, payloadJsx} from './modules/ae-bridge.mjs?v=94';
 
 const pane = $('[data-pane=beats]');
 if (pane) {
